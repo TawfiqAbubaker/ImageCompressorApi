@@ -83,9 +83,6 @@ public class MainClass {
         MediaType contentType = jpg ? MediaType.IMAGE_JPEG : MediaType.IMAGE_PNG;
         System.out.println("the type provided is " + jpg);
         String name = jpg ? "YOUR_COMPRESSED_IMAGE.jpg" : "YOUR_COMPRESSED_IMAGE.png";
-//        InputStream in = jpg ?
-//                getClass().getResourceAsStream("YOUR_COMPRESSED_IMAGE.jpg") :
-//                getClass().getResourceAsStream("/com/baeldung/produceimage/image.png");
         File compressedImageFile = new File(name);
 
         FileInputStream in = new FileInputStream(compressedImageFile);
