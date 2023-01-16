@@ -21,11 +21,11 @@ import javax.imageio.stream.ImageOutputStream;
 
 @RestController
 @CrossOrigin
-public class GreetingController {
+public class MainClass {
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String getGreeting() {
-        return "Go fuck yourself bitch ass motherfucker";
+        return "Hello fellow human being!";
     }
     @PostMapping("/compress")
     @ResponseBody
@@ -76,7 +76,7 @@ public class GreetingController {
                 .contentType(contentType)
                 .body(new InputStreamResource(in));
     }
-//    public pngCompressor()
+    //    public pngCompressor()
     @GetMapping("/get-image")
     @ResponseBody
     public ResponseEntity<InputStreamResource> getImageDynamicType(@RequestParam("jpg") boolean jpg) throws FileNotFoundException {
