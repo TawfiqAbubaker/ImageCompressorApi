@@ -1,8 +1,5 @@
 package com.compressor.springcompressor;
 
-import com.aspose.imaging.Image;
-import com.aspose.imaging.fileformats.jpeg.JpegCompressionMode;
-import com.aspose.imaging.imageoptions.JpegOptions;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,15 +26,16 @@ public class MainClass {
     }
     @PostMapping("/compress")
     @ResponseBody
-    public  ResponseEntity<InputStreamResource> compressImage(@RequestParam("file") MultipartFile file, @RequestParam("type") String type) throws IOException {
+    public  ResponseEntity<InputStreamResource> compressImage(@RequestParam("file") MultipartFile file, @RequestParam("type") String type,@RequestParam("force") String force ) throws IOException {
         System.out.println("the type provided is " + type);
+        float forceValue = Float.parseFloat(force);
         String name = "";
         name = type.equals("true")? "YOUR_COMPRESSED_IMAGE.jpg" : "YOUR_COMPRESSED_IMAGE.png";
         File compressedImageFile = new File(name);
         InputStream inputStream = file.getInputStream();
         OutputStream outputStream = new FileOutputStream(compressedImageFile);
 
-        float imageQuality = 0.1f;
+        float imageQuality = forceValue;
 
         //Create the buffered image
         BufferedImage bufferedImage = ImageIO.read(inputStream);
@@ -76,7 +74,6 @@ public class MainClass {
                 .contentType(contentType)
                 .body(new InputStreamResource(in));
     }
-    //    public pngCompressor()
     @GetMapping("/get-image")
     @ResponseBody
     public ResponseEntity<InputStreamResource> getImageDynamicType(@RequestParam("jpg") boolean jpg) throws FileNotFoundException {
